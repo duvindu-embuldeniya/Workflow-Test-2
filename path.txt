@@ -98,3 +98,34 @@ git pull
 docker compose down
 docker compose up --build -d
 
+-------------------------------------------------------------
+
+SSL (Full + Strick)...//
+
+mkdir -p /opt/clickmart/ssl
+chmod 700 /opt/clickmart/ssl
+
+
+# Certificate
+nano /opt/clickmart/ssl/origin-cert.pem
+# Paste the content of your Cloudflare Origin Certificate
+# Save and exit (Ctrl+O, Enter, Ctrl+X)
+
+# Key
+nano /opt/clickmart/ssl/origin-key.pem
+# Paste the content of your Cloudflare Origin Key
+# Save and exit
+
+
+Docker Compose...//
+volumes:
+  - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
+  - ./ssl/origin-cert.pem:/etc/ssl/cloudflare/origin-cert.pem:ro
+  - ./ssl/origin-key.pem:/etc/ssl/cloudflare/origin-key.pem:ro
+
+remove 80:80
+
+
+git pull
+docker compose down
+docker compose up -d
