@@ -41,6 +41,8 @@ services:
       - "443:443"
     volumes:
       - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
+      - ./ssl/origin-cert.pem:/etc/ssl/cloudflare/origin-cert.pem:ro
+      - ./ssl/origin-key.pem:/etc/ssl/cloudflare/origin-key.pem:ro
     depends_on:
       - frontend
       - backend
