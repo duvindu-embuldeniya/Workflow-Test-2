@@ -22,7 +22,7 @@ const RegisterComponent = () => {
     setLoading(true)
 
     try{
-        const response = await axios.post('http://localhost:8000/api/v1/register/', userData)
+        const response = await axios.post(`${import.meta.env.VITE_SERVER_BASE_URL}/register/`, userData)
         setSuccess(true)
         setUsername('')
         setEmail('')
